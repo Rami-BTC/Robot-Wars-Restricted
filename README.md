@@ -16,7 +16,7 @@
 
 ###
 
-<h2 align="center">Vorhandene Modelle:</h2>
+<h2 align="center">🎉 Viel Spaß! 🎉</h2>
 
 ###
 
