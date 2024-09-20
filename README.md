@@ -1,6 +1,4 @@
-<div align="center">
-  <img height="450" src="[https://www.awn.com/sites/default/files/styles/original/public/image/featured/1040162-giveaway-win-free-tickets-see-hayao-miyazakis-spirited-away.gif?itok=jQyJSei8](https://i.pinimg.com/originals/79/66/1c/79661ce094727e32d528874bb9683fae.jpg)"  />
-</div>
+https://i.pinimg.com/originals/79/66/1c/79661ce094727e32d528874bb9683fae.jpg
 
 ###
 
