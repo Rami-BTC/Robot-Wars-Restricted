@@ -174,7 +174,7 @@ public class Main {
                     Nach Links: [1]
                     Nach Rechts: [2]
                     Nach Oben: [3]
-                    Nach Unten: = [4]
+                    Nach Unten: [4]
                    
                    """);
 
@@ -195,6 +195,9 @@ public class Main {
                 }
                 while (movementDir == 4){
                     currentPosHeight++;
+                    movementDir = 0;
+                }
+                while (movementDir > 4){
                     movementDir = 0;
                 }
             }
