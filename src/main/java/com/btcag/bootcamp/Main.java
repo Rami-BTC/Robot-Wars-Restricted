@@ -85,7 +85,7 @@ public class Main {
         int length = 15;
         int height = 10;
 
-        int currentPosLength = 0;
+        int currentPosLength = 1;
         int currentPosHeight = 0;
 
         boolean gameOn = true;
@@ -125,6 +125,22 @@ public class Main {
             }
             robotShown = false;
 
+            while (currentPosLength == 15){
+                currentPosLength--;
+            }
+
+            while (currentPosLength == 0){
+                currentPosLength++;
+            }
+
+            while (currentPosHeight == 10){
+                currentPosHeight--;
+            }
+
+            while (currentPosHeight == -1){
+                currentPosHeight++;
+            }
+
             System.out.println("Spielfeld: ");
             int currentHeight = 0;
             while (currentHeight < height) {
@@ -163,6 +179,25 @@ public class Main {
                    """);
 
             movementDir = sc.nextInt();
+
+            while (movementDir > 0){
+                while (movementDir == 1){
+                    currentPosLength--;
+                    movementDir = 0;
+                }
+                while (movementDir == 2){
+                    currentPosLength++;
+                    movementDir = 0;
+                }
+                while (movementDir == 3){
+                    currentPosHeight--;
+                    movementDir = 0;
+                }
+                while (movementDir == 4){
+                    currentPosHeight++;
+                    movementDir = 0;
+                }
+            }
         }
     }
 }
