@@ -1,11 +1,14 @@
 package com.btcag.bootcamp;
 
 import java.util.Scanner;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        boolean gameOver = false;
 
+        //User
         String username = loginScreen(sc);
         int robotNumber = selectRobotNumber(sc);
         String robotName = selectRobotName(sc);
@@ -13,10 +16,18 @@ public class Main {
         int[][] playArea = new int [10][15];    // Y = 10, X = 15
         int[] userPos = {1, 1};                 // X = 1, Y = 1
 
-        while (true) {
+        //Enemy
+        String enemyRobotName = "Gegner";
+        int[] enemyPos = {15, 10};                // X = 15, Y = 10
+
+        //GameLoop
+        while (!gameOver) {
             showStats(username, robotName, robotNumber);
-            generateField(playArea, userPos, robotName);
-            moveRobot(sc, userPos);
+            generateField(playArea, userPos, robotName, enemyPos, enemyRobotName);
+            gameOver = checkEnemyCollision(userPos, enemyPos, robotName, enemyRobotName);
+            if (!gameOver){
+                moveRobot(sc, userPos);
+            }
         }
     }
 
@@ -108,13 +119,18 @@ public class Main {
      * @param playArea height & width of the play area
      * @param userPos Position of the user
      * @param robotName The robots name
+     * @param enemyPos Position of the enemy
+     * @param enemyRobotName Enemies robots name
      */
-    private static void generateField(int[][] playArea, int[] userPos, String robotName) {
+    private static void generateField(int[][] playArea, int[] userPos, String robotName, int[] enemyPos, String enemyRobotName) {
+        System.out.println("Deine Position: (" + userPos[0] + "," + userPos[1] +").");
+
         for (int y = 0; y < playArea.length; y++){
             for (int x = 0; x < playArea[y].length; x++){
                 System.out.print("[");
 
                 checkPlayerPositions(userPos, robotName, x, y);
+                checkPlayerPositions(enemyPos, enemyRobotName, x, y);
 
                 System.out.print("]");
             }
@@ -127,6 +143,33 @@ public class Main {
         } else {
             System.out.print(" ");
         }
+    }
+
+    /**
+     * Checks for Collision between players
+     *
+     * @param userPos Position of the user
+     * @param enemyPos Position of the enemy
+     * @param username The users name
+     * @param enemyName The enemies name
+     */
+    private static boolean checkEnemyCollision(int[] userPos, int[] enemyPos, String username, String enemyName){
+        int randomNum = ThreadLocalRandom.current().nextInt(0, 1 + 1);
+        if (userPos[0] == enemyPos[0] && userPos[1] == enemyPos[1]){
+            if (randomNum == 1){
+                announceWinner(username);
+                return true;
+            } else{
+                announceWinner(enemyName);
+                return true;
+            }
+        }
+        else{
+            return false;
+        }
+    }
+    private static void announceWinner(String winner) {
+        System.out.println("Nach einer Kollision beider Roboter konnte der Gewinner festgestellt werden: " + winner);
     }
 
     /**
@@ -170,7 +213,8 @@ public class Main {
         }
     }
 
-    //----Misc...----
+    //------------------------------------------MISC----------------------------------------------------//
+
     /**
      * "Clears" the console
      */
@@ -219,23 +263,6 @@ public class Main {
         System.out.println("""                                                            
                 ~~~~~~~~~~~~//~~~~~~~~~~~~~~~~~~~||~~~~~~~~~~~~~~~~~~~//~~~~~~~~~~~~
                 """);
-    }
-
-    //I might need those in the future
-    private static void generateCoordsX(){
-        char[] coords = {'/', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O'};
-
-        for (char c : coords){
-            System.out.print("["+c+"]");
-
-            if (c == 'O'){
-                System.out.println();
-            }
-        }
-    }
-    private static void generateCoordsY(int currCord){
-
-        System.out.print("["+currCord+"]");
     }
 
     //-----------------------------------------ASCII----------------------------------------------------//
